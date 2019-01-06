@@ -1,6 +1,7 @@
 package com.erk.tests;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +23,15 @@ public class Tests extends TestBase {
 	 
 	@Test
 	public void scenarioPozitive() {
+
+		extentLogger = report.createTest("My New Test");
 		FormPage page = new FormPage();
+		extentLogger.info("entering user credentials");
 		page.FirstName.sendKeys(ConfigurationReader.getProperty("username"));
 		page.lastName.sendKeys(ConfigurationReader.getProperty("password"));
 		page.maleRadioButton.click();
+		extentLogger.info("click login");
+		extentLogger.pass("Verified log out link displayed");
 		
 		page.yearsofExperience.click();
 		page.datePicker.sendKeys(ConfigurationReader.getProperty("Date"));
@@ -34,11 +40,12 @@ public class Tests extends TestBase {
 		page.inputFile.sendKeys(filePath);
 		page.seleniumWebdriver.click();
 		Select select= new Select(page.continents);
-		select.selectByIndex(6);
+		select.selectByIndex(5);
 		Select commands =new Select(page.seleniumCommands);
 		commands.selectByIndex(3);
 		page.submitButton.click();
-		
+	
+
 
 	}
 	@Ignore
